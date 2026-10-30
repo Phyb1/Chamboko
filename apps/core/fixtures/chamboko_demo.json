@@ -1,0 +1,137 @@
+[
+  {
+    "model": "core.siteprofile",
+    "pk": 1,
+    "fields": {
+      "site_name": "Chamboko Solar Technology",
+      "tagline": "Solar products, installation and maintenance",
+      "hero_title": "Solar energy solutions for Zimbabwe",
+      "hero_text": "Panels, inverters, lithium batteries, water pumps and complete solar packages for homes and businesses, designed to help you cut your fuel bills.",
+      "about_title": "Bringing clean energy to Zimbabwe",
+      "about_text": "Chamboko Solar Technology is a wholly owned Zimbabwean company dedicated to bringing light and hope to every home through high-quality solar energy solutions.\n\nWe supply solar panels, power and hybrid inverters, lithium batteries, solar water pumps, solar lighting systems and solar fridges for residential and commercial use.",
+      "meta_description": "Solar panels, inverters, lithium batteries, water pumps and complete solar packages in Harare. Request a quote from Chamboko Solar Technology.",
+      "phone": "+263 710 955 403",
+      "email": "info@chambokosolartechnology.co.zw",
+      "whatsapp_number": "263710955403",
+      "address": "83 Denbigh, Belvedere, Harare, Zimbabwe",
+      "opening_hours": "",
+      "facebook_url": "",
+      "instagram_url": "",
+      "brand_primary": "#1F3FA8",
+      "brand_dark": "#0E1F5C",
+      "brand_light": "#F2F6FF",
+      "logo_image": "images/brand/logo.png",
+      "hero_image": "images/hero.png",
+      "updated_at": "2026-10-30T08:00:00Z"
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 1,
+    "fields": {
+      "name": "System Design & Installation",
+      "description": "Professional solar system design and installation for residential and commercial properties.",
+      "icon": "☀",
+      "sort_order": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 2,
+    "fields": {
+      "name": "Energy Audits",
+      "description": "Comprehensive energy assessments and personalised recommendations for your needs.",
+      "icon": "◎",
+      "sort_order": 2,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 3,
+    "fields": {
+      "name": "Maintenance & Repair",
+      "description": "Regular maintenance and repair services to keep your solar system running efficiently.",
+      "icon": "⚙",
+      "sort_order": 3,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 4,
+    "fields": {
+      "name": "Water Pumping Systems",
+      "description": "Solar-powered water pumping solutions for irrigation and water supply.",
+      "icon": "≈",
+      "sort_order": 4,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 5,
+    "fields": {
+      "name": "System Upgrades",
+      "description": "Upgrade existing solar systems to increase efficiency and performance.",
+      "icon": "↑",
+      "sort_order": 5,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.service",
+    "pk": 6,
+    "fields": {
+      "name": "Consultation & Advisory",
+      "description": "Expert guidance on solar energy solutions and energy efficiency strategies.",
+      "icon": "✎",
+      "sort_order": 6,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.branch",
+    "pk": 1,
+    "fields": {
+      "name": "Harare",
+      "address": "83 Denbigh, Belvedere, Harare, Zimbabwe",
+      "phone": "+263 710 955 403",
+      "whatsapp_number": "263710955403",
+      "latitude": null,
+      "longitude": null,
+      "google_place_id": "",
+      "sort_order": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.package",
+    "pk": 1,
+    "fields": {
+      "name": "3.3 KVA SRNE Package",
+      "badge": "",
+      "price": "1200.00",
+      "summary": "A hybrid inverter, lithium battery and two panels, with free installation.",
+      "includes": "3.3 kVA SRNE hybrid inverter\n25.6 V SRNE lithium battery\n2 x 450 W panels\nProtection kit\nCable kit\nMounting kit\nAccessories\nFree installation",
+      "runs": "Fridge\nEntertainment\nWiFi\nLights\nBorehole pump\nCCTV\nBooster pump\nComputers\nPrinters\nFan\nCharging\nPlus all approved loads",
+      "sort_order": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "core.package",
+    "pk": 2,
+    "fields": {
+      "name": "6.2 KVA Package",
+      "badge": "Christmas special",
+      "price": "2200.00",
+      "summary": "A 6.2 kVA hybrid inverter with eight panels and a 48 V lithium battery, plus one extra panel free.",
+      "includes": "6.2 kVA hybrid inverter\n8 x 450 W panels\n48 V 100 Ah lithium battery\n1 extra panel free (Christmas offer)\nMounting kit\nCable kit\nProtection kit\nAccessories\nFree installation",
+      "runs": "Multiple fridges\nEntertainment\nElectric fence\nLights\nBorehole pump\nBooster pump\nWiFi\nCCTV\nFan\nAlarm\nSolar iron\nWashing machine\nPower tools\nGate motor\nPlus all approved loads",
+      "sort_order": 2,
+      "is_active": true
+    }
+  }
+]

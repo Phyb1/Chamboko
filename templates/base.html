@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+<meta name="description" content="{{ META_DESCRIPTION }}">
+<meta name="theme-color" content="{{ BRAND_PRIMARY }}">
+<link rel="icon" href="{% static LOGO_IMAGE %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<style>:root{--brand-primary:{{ BRAND_PRIMARY }};--brand-dark:{{ BRAND_DARK }};--brand-light:{{ BRAND_LIGHT }};}</style>
+<script src="https://unpkg.com/htmx.org@2.0.7"></script>
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+{% csrf_token %}
+<header class="site-header">
+  <a class="brand" href="{% url 'core:home' %}" data-track-type="navigation" data-track-label="Home">
+    <img src="{% static LOGO_IMAGE %}" alt="{{ SITE_NAME }} logo"><span>{{ SITE_NAME }}</span>
+  </a>
+  <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><span class="sr-only">Menu</span></button>
+  <nav id="main-nav" class="main-nav" data-nav>
+    <a href="{% url 'core:home' %}" data-track-type="navigation" data-track-label="Home">Home</a>
+    <a href="{% url 'core:services' %}" data-track-type="navigation" data-track-label="Services">Services</a>
+    <a href="{% url 'core:about' %}" data-track-type="navigation" data-track-label="About">About</a>
+    <a href="{% url 'core:contact' %}" data-track-type="navigation" data-track-label="Contact">Contact</a>
+    <a class="nav-cta" href="{% url 'core:contact' %}#quote" data-track-type="navigation" data-track-label="Header quote">Get a quote</a>
+  </nav>
+</header>
+
+<main class="site-main">{% block content %}{% endblock %}</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><h3>{{ SITE_NAME }}</h3><p>{{ TAGLINE }}</p></div>
+    <div><h3>Contact</h3>
+      {% if BUSINESS_PHONE_DISPLAY %}<p><a href="tel:{{ BUSINESS_PHONE_DISPLAY|cut:' ' }}" data-track-type="phone" data-track-label="Footer phone">{{ BUSINESS_PHONE_DISPLAY }}</a></p>{% endif %}
+      {% if BUSINESS_EMAIL %}<p><a href="mailto:{{ BUSINESS_EMAIL }}" data-track-type="email" data-track-label="Footer email">{{ BUSINESS_EMAIL }}</a></p>{% endif %}
+    </div>
+    <div><h3>Visit</h3><p>{{ BUSINESS_ADDRESS }}</p>{% if OPENING_HOURS %}<p>{{ OPENING_HOURS }}</p>{% endif %}</div>
+  </div>
+  <div class="footer-bottom"><span>&copy; {% now "Y" %} {{ SITE_NAME }}</span><span>Website by PHYB</span></div>
+</footer>
+
+<a class="whatsapp-fab" href="{{ WHATSAPP_LINK }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-track-type="whatsapp" data-track-label="Floating WhatsApp">◉ <span>WhatsApp</span></a>
+<script src="{% static 'js/nav-toggle.js' %}"></script>
+<script src="{% static 'js/site.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

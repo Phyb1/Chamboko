@@ -1,0 +1,5 @@
+<div class="detail-inner">
+  <div><span class="detail-icon">{{ service.icon|default:"✦" }}</span><div><p class="eyebrow">Selected service</p><h3>{{ service.name }}</h3></div></div>
+  <p>{{ service.description }}</p>
+  <a class="btn btn-icon" href="{{ service_whatsapp }}" target="_blank" rel="noopener" data-track-type="whatsapp" data-track-label="Service: {{ service.name }}" data-service-id="{{ service.pk }}">◉ <span>Enquire about {{ service.name }}</span></a>
+</div>

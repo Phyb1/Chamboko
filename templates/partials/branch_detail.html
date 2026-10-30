@@ -1,0 +1,8 @@
+<div class="detail-inner">
+  <div><span class="detail-icon">⌖</span><div><p class="eyebrow">Selected branch</p><h3>{{ branch.name }}</h3></div></div>
+  <p>{{ branch.address }}</p>
+  <div class="detail-actions">
+    {% if branch.phone %}<a class="btn btn-outline" href="tel:{{ branch.phone|cut:' ' }}" data-track-type="phone" data-track-label="Branch: {{ branch.name }}" data-branch-id="{{ branch.pk }}">☎ Call</a>{% endif %}
+    <a class="btn" href="{{ directions_url }}" target="_blank" rel="noopener" data-track-type="directions" data-track-label="Branch: {{ branch.name }}" data-branch-id="{{ branch.pk }}">⌖ Get directions</a>
+  </div>
+</div>

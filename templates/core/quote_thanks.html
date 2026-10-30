@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Thank you — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">Request received</p>
+  <h1>Thank you, {{ quote.name }}.</h1>
+  <p>We have your quote request and will contact you on {{ quote.phone }}.</p>
+</section>
+
+<section class="thanks-layout">
+  <div class="contact-card">
+    <span class="card-kicker">Your request</span>
+    <h2>Summary</h2>
+    <dl class="summary-list">
+      <div><dt>Name</dt><dd>{{ quote.name }}</dd></div>
+      <div><dt>Phone</dt><dd>{{ quote.phone }}</dd></div>
+      {% if quote.email %}<div><dt>Email</dt><dd>{{ quote.email }}</dd></div>{% endif %}
+      <div><dt>Location</dt><dd>{{ quote.location }}</dd></div>
+      <div><dt>Package</dt><dd>{% if quote.package %}{{ quote.package.name }}{% else %}Not sure yet{% endif %}</dd></div>
+      {% if quote.message %}<div><dt>Details</dt><dd>{{ quote.message|linebreaksbr }}</dd></div>{% endif %}
+    </dl>
+  </div>
+  <div class="about-note thanks-whatsapp">
+    <div><span class="card-kicker">Want a faster reply?</span><h2>Send it on WhatsApp.</h2><p>Your details are filled in for you. Just tap send.</p></div>
+    <a class="btn btn-icon" href="{{ quote_whatsapp }}" target="_blank" rel="noopener" data-track-type="whatsapp" data-track-label="Thanks WhatsApp">◉ <span>Send on WhatsApp</span></a>
+  </div>
+</section>
+{% endblock %}

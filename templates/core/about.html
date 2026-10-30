@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">About us</p>
+  <h1>{{ ABOUT_TITLE }}</h1>
+</section>
+
+<section class="about-layout">
+  <div class="about-copy">{{ ABOUT_TEXT|linebreaks }}</div>
+  <div class="about-photos reveal">
+    <img src="{% static 'images/panels-sun.jpg' %}" alt="Solar panels in the sunshine" loading="lazy">
+    <img src="{% static 'images/ground-array.jpg' %}" alt="A ground-mounted solar array" loading="lazy">
+  </div>
+</section>
+
+<section class="about-note">
+  <div><span class="card-kicker">Let's talk</span><h2>Ready to go solar?</h2><p>Send us your details and we will get back to you with a quote.</p></div>
+  <a class="btn" href="{% url 'core:contact' %}#quote" data-track-type="navigation" data-track-label="About quote">Request a quote</a>
+</section>
+{% endblock %}

@@ -1,0 +1,5 @@
+"""Passenger entry point. cPanel supplies the configured Python virtualenv."""
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings.prod")
+from django.core.wsgi import get_wsgi_application
+application=get_wsgi_application()

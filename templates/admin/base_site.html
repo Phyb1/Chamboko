@@ -1,0 +1,5 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ title }} | PHYB Signpost{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}">{% endblock %}
+{% block branding %}<a href="{% url 'signpost_admin:index' %}" class="admin-brand"><span>PHYB</span> Signpost</a>{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Services and packages — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">Services and packages</p>
+  <h1>Solar systems, installed and looked after.</h1>
+  <p>From a single package to a custom design, we help you choose, install and maintain the right solar system.</p>
+</section>
+
+<section class="section" id="packages">
+  <div class="section-heading">
+    <p class="eyebrow">Solar packages</p>
+    <h2>Packages and prices</h2>
+    <p>Prices are in US dollars. Not sure which one fits? Send us your details and we will advise.</p>
+  </div>
+  <div class="package-grid">
+    {% for package in PACKAGES %}
+      {% include "partials/package_card.html" with package=package %}
+    {% empty %}
+    <p>Packages will be listed here soon. <a href="{% url 'core:contact' %}#quote">Request a quote</a> in the meantime.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="section-heading">
+    <p class="eyebrow">What we offer</p>
+    <h2>Our services</h2>
+  </div>
+  <div class="service-list">
+    {% for service in SERVICES %}
+    <article class="service-row reveal">
+      <span class="service-icon">{{ service.icon|default:"✦" }}</span>
+      <div><h3>{{ service.name }}</h3><p>{{ service.description }}</p></div>
+      <a class="btn btn-outline" href="{% url 'core:contact' %}#quote" data-track-type="service" data-track-label="{{ service.name }}" data-service-id="{{ service.pk }}">Ask about this</a>
+    </article>
+    {% empty %}
+    <p>Services will be listed here soon.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="about-note">
+  <div><span class="card-kicker">Need something different?</span><h2>Tell us what you need.</h2><p>Send your details and we will recommend a system that fits.</p></div>
+  <a class="btn" href="{% url 'core:contact' %}#quote" data-track-type="navigation" data-track-label="Services quote">Request a quote</a>
+</section>
+{% endblock %}

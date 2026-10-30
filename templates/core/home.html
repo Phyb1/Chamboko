@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ SITE_NAME }} — {{ TAGLINE }}{% endblock %}
+{% block content %}
+
+<div class="progress-nav" aria-label="Page sections">
+  <a href="#top" class="is-active" data-progress="top" aria-label="Intro"><span></span></a>
+  <a href="#packages" data-progress="packages" aria-label="Packages"><span></span></a>
+  <a href="#services" data-progress="services" aria-label="Services"><span></span></a>
+  <a href="#contact" data-progress="contact" aria-label="Get a quote"><span></span></a>
+</div>
+
+<section class="hero page-section" id="top" data-section="top">
+  <div class="hero-copy">
+    <p class="eyebrow">{{ TAGLINE }}</p>
+    <h1>{{ HERO_TITLE }}</h1>
+    <p class="hero-text">{{ HERO_TEXT }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-icon" href="{% url 'core:contact' %}#quote" data-track-type="navigation" data-track-label="Hero quote">⚡ <span>Request a quote</span></a>
+      <a class="btn btn-outline btn-icon" href="{{ WHATSAPP_LINK }}" target="_blank" rel="noopener" data-track-type="whatsapp" data-track-label="Hero WhatsApp">◉ <span>Chat on WhatsApp</span></a>
+    </div>
+  </div>
+  <div class="hero-media reveal"><img class="hero-image" src="{% static HERO_IMAGE %}" alt="{{ SITE_NAME }}" loading="eager"></div>
+</section>
+
+<section class="quick-strip reveal">
+  <div><span class="quick-icon">✦</span><strong>Complete packages</strong><small>Inverter, battery, panels and kits</small></div>
+  <div><span class="quick-icon">⚙</span><strong>Free installation</strong><small>Included with our packages</small></div>
+  <div><span class="quick-icon">◉</span><strong>Quotes by WhatsApp or email</strong><small>Send your details in a minute</small></div>
+</section>
+
+{% if PACKAGES %}
+<section class="section page-section" id="packages" data-section="packages">
+  <div class="section-heading">
+    <p class="eyebrow">Solar packages</p>
+    <h2>Ready-to-install systems.</h2>
+    <p>Prices are in US dollars. Choose a package, or ask us for something different.</p>
+  </div>
+  <div class="package-grid">
+    {% for package in PACKAGES|slice:":2" %}
+      {% include "partials/package_card.html" with package=package %}
+    {% endfor %}
+  </div>
+  <p class="more-link"><a href="{% url 'core:services' %}#packages">See all packages and services →</a></p>
+</section>
+{% endif %}
+
+<section class="section page-section" id="services" data-section="services">
+  <div class="section-heading">
+    <p class="eyebrow">What we offer</p>
+    <h2>Services that solve a real need.</h2>
+    <p>Choose a service to see the details, then enquire directly.</p>
+  </div>
+  <div class="service-grid">
+    {% for service in SERVICES %}
+    <article class="service-card reveal">
+      <button class="service-trigger" type="button"
+              hx-get="{% url 'core:service_detail' service.pk %}"
+              hx-target="#service-detail"
+              hx-swap="innerHTML"
+              data-track-type="service"
+              data-track-label="{{ service.name }}"
+              data-service-id="{{ service.pk }}">
+        <span class="service-icon">{{ service.icon|default:"✦" }}</span>
+        <span><strong>{{ service.name }}</strong><small>{{ service.description|truncatewords:12 }}</small></span>
+        <span class="service-arrow">→</span>
+      </button>
+    </article>
+    {% empty %}
+    <p>Add services from the Django admin.</p>
+    {% endfor %}
+  </div>
+  <div id="service-detail" class="interactive-detail" aria-live="polite">
+    <p class="detail-hint">Tap a service above to explore it.</p>
+  </div>
+</section>
+
+<section class="cta-band page-section" id="contact" data-section="contact">
+  <div><p class="eyebrow">Ready?</p><h2>Get a quote from {{ SITE_NAME }}.</h2><p>Tell us where you are and what you need to power, and we will get back to you.</p></div>
+  <a class="btn btn-light btn-icon" href="{% url 'core:contact' %}#quote" data-track-type="navigation" data-track-label="Bottom quote">⚡ <span>Request a quote</span></a>
+</section>
+{% endblock %}

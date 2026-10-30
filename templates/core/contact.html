@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Contact and quotes — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">Contact us</p>
+  <h1>Request a quote.</h1>
+  <p>Tell us where you are and what you need to power. We will contact you with a quote.</p>
+</section>
+
+<section class="contact-layout contact-layout-form">
+  <div class="contact-card quote-card" id="quote">
+    <span class="card-kicker">Quote request</span>
+    <h2>Send us your details</h2>
+    <form method="post" action="{% url 'core:contact' %}#quote" class="quote-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+      <div class="hp" aria-hidden="true">
+        <label for="{{ form.hp_website.id_for_label }}">{{ form.hp_website.label }}</label>
+        {{ form.hp_website }}
+      </div>
+      {% for field in form.visible_fields %}
+        {% if field.name != "hp_website" %}
+        <div class="field{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endif %}
+      {% endfor %}
+      <button class="btn btn-icon" type="submit">⚡ <span>Send quote request</span></button>
+      <p class="form-note">We save your request and notify the team. You can also send it on WhatsApp straight after.</p>
+    </form>
+  </div>
+
+  <div class="contact-side">
+    <div class="contact-card reveal">
+      <span class="card-kicker">Get in touch</span>
+      <h2>Contact</h2>
+      <div class="contact-actions">
+        {% if BUSINESS_PHONE_DISPLAY %}<a class="contact-action" href="tel:{{ BUSINESS_PHONE_DISPLAY|cut:' ' }}" data-track-type="phone" data-track-label="Contact phone"><span>☎</span><strong>Call</strong><small>{{ BUSINESS_PHONE_DISPLAY }}</small></a>{% endif %}
+        {% if BUSINESS_EMAIL %}<a class="contact-action" href="mailto:{{ BUSINESS_EMAIL }}" data-track-type="email" data-track-label="Contact email"><span>✉</span><strong>Email</strong><small>{{ BUSINESS_EMAIL }}</small></a>{% endif %}
+        <a class="contact-action" href="{{ WHATSAPP_LINK }}" target="_blank" rel="noopener" data-track-type="whatsapp" data-track-label="Contact WhatsApp"><span>◉</span><strong>WhatsApp</strong><small>Message us directly</small></a>
+      </div>
+      {% if OPENING_HOURS %}<div class="hours"><strong>Opening hours</strong><span>{{ OPENING_HOURS }}</span></div>{% endif %}
+    </div>
+
+    <div class="contact-card location-card reveal">
+      <span class="card-kicker">Visit us</span>
+      <h2>Find us</h2>
+      <p>{{ BUSINESS_ADDRESS }}</p>
+      <a class="btn btn-icon" href="https://www.google.com/maps/search/?api=1&query={{ BUSINESS_ADDRESS|urlencode }}" target="_blank" rel="noopener" data-track-type="directions" data-track-label="Main location">⌖ <span>Open in Google Maps</span></a>
+    </div>
+  </div>
+</section>
+
+{% if BRANCHES|length > 1 %}
+<section class="section">
+  <div class="section-heading"><p class="eyebrow">Where to find us</p><h2>Our locations</h2><p>Tap a branch for its contact and directions.</p></div>
+  <div class="branch-grid">
+    {% for branch in BRANCHES %}
+    <article class="branch-card reveal">
+      <button class="branch-trigger" type="button" hx-get="{% url 'core:branch_detail' branch.object.pk %}" hx-target="#branch-detail" hx-swap="innerHTML">
+        <span class="branch-pin">⌖</span><span><strong>{{ branch.name }}</strong><small>{{ branch.address }}</small></span><span>→</span>
+      </button>
+    </article>
+    {% endfor %}
+  </div>
+  <div id="branch-detail" class="interactive-detail" aria-live="polite"><p class="detail-hint">Tap a branch above to view details.</p></div>
+</section>
+{% endif %}
+{% endblock %}

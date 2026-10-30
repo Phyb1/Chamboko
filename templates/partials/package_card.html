@@ -1,0 +1,21 @@
+<article class="package-card reveal">
+  {% if package.badge %}<span class="package-badge">{{ package.badge }}</span>{% endif %}
+  <h3>{{ package.name }}</h3>
+  <p class="package-price"><strong>{{ package.price_display }}</strong> <small>USD</small></p>
+  {% if package.summary %}<p class="package-summary">{{ package.summary }}</p>{% endif %}
+  <div class="package-lists">
+    <div>
+      <h4>What you get</h4>
+      <ul>{% for item in package.includes_list %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+    {% with runs=package.runs_list %}
+    {% if runs %}
+    <div>
+      <h4>What it can power</h4>
+      <ul>{% for item in runs %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+  </div>
+  <a class="btn" href="{% url 'core:contact' %}?package={{ package.pk }}#quote" data-track-type="navigation" data-track-label="Quote: {{ package.name }}">Request this package</a>
+</article>

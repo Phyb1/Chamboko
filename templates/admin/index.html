@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block content %}
+<div class="sp-dashboard">
+  <div class="sp-dashboard-head">
+    <div><p class="sp-kicker">30 day activity</p><h1>Website dashboard</h1><p>See what visitors are actually using on this Signpost site.</p></div>
+    <a class="sp-view-site" href="/" target="_blank">View website ↗</a>
+  </div>
+
+  <div class="sp-metrics">
+    <div class="sp-metric"><span>All tracked actions</span><strong>{{ signpost_metrics.total }}</strong></div>
+    <div class="sp-metric"><span>WhatsApp</span><strong>{{ signpost_metrics.whatsapp }}</strong></div>
+    <div class="sp-metric"><span>Directions</span><strong>{{ signpost_metrics.directions }}</strong></div>
+    <div class="sp-metric"><span>Calls</span><strong>{{ signpost_metrics.phone }}</strong></div>
+    <div class="sp-metric"><span>Emails</span><strong>{{ signpost_metrics.email }}</strong></div>
+    <div class="sp-metric"><span>Service enquiries</span><strong>{{ signpost_metrics.services }}</strong></div>
+    <div class="sp-metric"><span>Quote requests</span><strong>{{ signpost_metrics.quotes }}</strong></div>
+    <div class="sp-metric"><span>New, not yet contacted</span><strong>{{ signpost_metrics.new_quotes }}</strong></div>
+  </div>
+
+  <div class="sp-panels">
+    <section class="sp-panel">
+      <h2>Top services</h2>
+      {% for item in signpost_metrics.top_services %}<div class="sp-row"><span>{{ item.service__name }}</span><strong>{{ item.total }}</strong></div>{% empty %}<p class="sp-muted">No service clicks yet.</p>{% endfor %}
+    </section>
+    <section class="sp-panel">
+      <h2>Branch activity</h2>
+      {% for item in signpost_metrics.top_branches %}<div class="sp-row"><span>{{ item.branch__name }}</span><strong>{{ item.total }}</strong></div>{% empty %}<p class="sp-muted">No branch actions yet.</p>{% endfor %}
+    </section>
+  </div>
+
+  <div class="sp-content">
+    <div class="sp-content-head"><h2>Manage website</h2><p>Everything the client is likely to change lives here.</p></div>
+    {% if app_list %}
+      {% for app in app_list %}
+      <section class="sp-app">
+        <h3>{{ app.name }}</h3>
+        <div class="sp-app-grid">
+        {% for model in app.models %}
+          <a href="{{ model.admin_url }}"><strong>{{ model.name }}</strong><span>{% if model.add_url %}Add or edit{% else %}View{% endif %} →</span></a>
+        {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
